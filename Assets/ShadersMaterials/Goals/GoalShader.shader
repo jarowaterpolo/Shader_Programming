@@ -49,8 +49,29 @@ Shader "CustomGoalTexture/GoalShader"
                 // float radAngle = atan2(x,-y);
                 // float a2 = radAngle + fmod(_Time.y, 2 * PI);
 
-                color = _Color;
+                if (uv.x <= .1 || uv.x >= .9 || uv.y > .8)
+                {
+                    color = _Color;
+                }
+                else
+                {
+                    float gridscale = 10;
+                    float2 st = frac(uv * gridscale);
+
+                    float thickness = 0.1;
+
+                    float LineX = step(st.x, thickness);
+                    float LineY = step(st.y, thickness);
+
+                    float netPattern = max(LineX, LineY);
+
+                    color = _Color;
+
+                    clip(netPattern - 0.01);
+                }
                
+                clip(color.a - 0.01);
+
 				return color;
             }
             ENDCG
