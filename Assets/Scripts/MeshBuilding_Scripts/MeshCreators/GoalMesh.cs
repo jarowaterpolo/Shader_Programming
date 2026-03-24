@@ -8,32 +8,42 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Handout {
-	public class GoalMesh : MonoBehaviour {
-		public float width=3;
-		public float height=1;
-		public float depth=1;
-        public bool RotateStairs;
-        public float deg;
-        private float rad;
+    public class GoalMesh : MonoBehaviour
+    {
+        public float width = 3;
+        public float height = 1;
+        public float depth = 1;
 
         [Space(20)]
-        public float delayStairsRebuilding = 1;
+        public float SideBarSize = .6f;
+        private float TopBarSize;
 
-		MeshBuilder builder;
+        [Space(20)]
+        public float delayRebuilding = 1;
 
-		void Start () {
-			builder = new MeshBuilder ();
-			//CreateShape ();
-            StartCoroutine(StairRebuild());
-		}
+        MeshBuilder builder;
 
+        void Start()
+        {
+            TopBarSize = SideBarSize / 2;
+            builder = new MeshBuilder();
+            CreateShape ();
+            //StartCoroutine(Rebuild());
+        }
+
+        private void OnEnable()
+        {
+            TopBarSize = SideBarSize / 2;
+            builder = new MeshBuilder();
+            CreateShape ();
+            //StartCoroutine(Rebuild());
+        }
         /// <summary>
         /// Creates a stairway shape in [builder].
         /// </summary>
         void CreateShape()
         {
-            Debug.Log("create the stair");
-            rad = deg * Mathf.Deg2Rad;
+            Debug.Log("create the Goal");
 
             builder.Clear();
 
@@ -49,13 +59,13 @@ namespace Handout {
             Vector3 offsetZ = new(0, 0, 1);
 
             Vector3[] vertices = {
-                //front bottom
+                //back bottom
                 /*v1*/    new(width, 0, 0),
                 /*v2*/    new (-width, 0, 0),
-                // top front:
+                // top back:
                 /*v3*/    new(width, height, 0),
                 /*v4*/    new(-width, height, 0),
-                // top back:
+                // top front:
                 /*v5*/    new(width, height, depth),
                 /*v6*/    new(-width, height, depth),
                 // R side
@@ -70,11 +80,21 @@ namespace Handout {
                 /*v13*/   new(-width, 0, 0),
                 /*v14*/   new(-width, 0, depth),
 
-                // back
+                // front
+                //R
                 /*v15*/   new(width, 0, depth),
-                /*v16*/   new(-width, 0, depth),
-                /*v17*/   new(width, height, depth),
-                /*v18*/   new(-width, height, depth)
+                /*v16*/   new(width, height, depth),
+                /*v17*/   new(width - SideBarSize, 0, depth),
+                /*v18*/   new(width - SideBarSize, height, depth),
+                //L
+                /*v19*/   new(-width, 0, depth),
+                /*v20*/   new(-width, height, depth),
+                /*v21*/   new(-width + SideBarSize, 0, depth),
+                /*v22*/   new(-width + SideBarSize, height, depth),
+
+                //Top Bar
+                /*v23*/   new(width - SideBarSize, height - TopBarSize, depth),
+                /*v24*/   new(-width + SideBarSize, height - TopBarSize, depth)
                 };
 
             int v1 = new();
@@ -95,77 +115,104 @@ namespace Handout {
             int v16 = new();
             int v17 = new();
             int v18 = new();
+            int v19 = new();
+            int v20 = new();
+            int v21 = new();
+            int v22 = new();
+            int v23 = new();
+            int v24 = new();
 
-            Vector3 offset = new Vector3(0, height, depth);
-
-            //front bottom
-            v1 = builder.AddVertex(offset + vertices[0], new Vector2(1, 0));
-            v2 = builder.AddVertex(offset + vertices[1], new Vector2(0, 0));
-            // top front:
-            v3 = builder.AddVertex(offset + vertices[2], new Vector2(1, 0.5f));
-            v4 = builder.AddVertex(offset + vertices[3], new Vector2(0, 0.5f));
-
-            //UV Changes test
-
+            //back bottom
+            v1 = builder.AddVertex(vertices[0], new Vector2(.91f, 0));
+            v2 = builder.AddVertex(vertices[1], new Vector2(.1f, 0));
             // top back:
-            v5 = builder.AddVertex(offset + vertices[4], new Vector2(1, 1));
-            v6 = builder.AddVertex(offset + vertices[5], new Vector2(0, 1));
+            v3 = builder.AddVertex(vertices[2], new Vector2(.91f, 0.5f));
+            v4 = builder.AddVertex(vertices[3], new Vector2(.1f, 0.5f));
+
+            // top front:
+            v5 = builder.AddVertex(vertices[4], new Vector2(.91f, .9f));
+            v6 = builder.AddVertex(vertices[5], new Vector2(.1f, .9f));
+
             // R side
-            v7 = builder.AddVertex(offset + vertices[6], new Vector2(0, 1));
-            v8 = builder.AddVertex(offset + vertices[7], new Vector2(0, 1));
-            v9 = builder.AddVertex(offset + vertices[8], new Vector2(0, 0));
-
-            v10 = builder.AddVertex(offset + vertices[9], new Vector2(0, 0));
+            v7 = builder.AddVertex(vertices[6], new Vector2(.605f, .505f));
+            v8 = builder.AddVertex(vertices[7], new Vector2(.605f, .9f));
+            v9 = builder.AddVertex(vertices[8], new Vector2(.1f, .505f));
+            v10 = builder.AddVertex(vertices[9], new Vector2(.1f, .9f));
             // L side
-            v11 = builder.AddVertex(offset + vertices[10], new Vector2(0, 1));
-            v12 = builder.AddVertex(offset + vertices[11], new Vector2(0, 1));
-            v13 = builder.AddVertex(offset + vertices[12], new Vector2(0, 0));
+            v11 = builder.AddVertex(vertices[10], new Vector2(.605f, .505f));
+            v12 = builder.AddVertex(vertices[11], new Vector2(.605f, .9f));
+            v13 = builder.AddVertex(vertices[12], new Vector2(.1f, .505f));
+            v14 = builder.AddVertex(vertices[13], new Vector2(.1f, .9f));
 
-            v14 = builder.AddVertex(offset + vertices[13], new Vector2(0, 0));
-            // back
-            v15 = builder.AddVertex(offset + vertices[14], new Vector2(1, 0));
-            v16 = builder.AddVertex(offset + vertices[15], new Vector2(0, 0));
-            v17 = builder.AddVertex(offset + vertices[16], new Vector2(1, 1));
-            v18 = builder.AddVertex(offset + vertices[17], new Vector2(0, 1));
+            // front
+            //R
+            v15 = builder.AddVertex(vertices[14], new Vector2(1, 1));
+            v16 = builder.AddVertex(vertices[15], new Vector2(1, 1));
+            v17 = builder.AddVertex(vertices[16], new Vector2(0, 1));
+            v18 = builder.AddVertex(vertices[17], new Vector2(0, 1));
+            //L
+            v19 = builder.AddVertex(vertices[18], new Vector2(0, 0));
+            v20 = builder.AddVertex(vertices[19], new Vector2(0, 1));
+            v21 = builder.AddVertex(vertices[20], new Vector2(0, 0));
+            v22 = builder.AddVertex(vertices[21], new Vector2(0, 1));
+            v23 = builder.AddVertex(vertices[22], new Vector2(0, 0));
+            v24 = builder.AddVertex(vertices[23], new Vector2(0, 1));
 
-            //front triangles
+            //back triangles
+            //out 
             builder.AddTriangle(v1, v2, v3);
             builder.AddTriangle(v4, v3, v2);
+            //in
+            builder.AddTriangle(v3, v2, v1);
+            builder.AddTriangle(v2, v3, v4);
 
             //top triangles
+            //out
             builder.AddTriangle(v3, v4, v5);
             builder.AddTriangle(v6, v5, v4);
+            //in
+            builder.AddTriangle(v5, v4, v3);
+            builder.AddTriangle(v4, v5, v6);
 
             //side
             //R
+            //out
             builder.AddTriangle(v7, v8, v9);
             builder.AddTriangle(v10, v9, v8);
+            //in
+            builder.AddTriangle(v9, v8, v7);
+            builder.AddTriangle(v8, v9, v10);
+
             //L
+            //out
             builder.AddTriangle(v13, v12, v11);
             builder.AddTriangle(v12, v13, v14);
+            //in
+            builder.AddTriangle(v11, v12, v13);
+            builder.AddTriangle(v14, v13, v12);
 
-            //back
-            builder.AddTriangle(v17, v16, v15);
-            builder.AddTriangle(v16, v17, v18);
+            //front
+            //builder.AddTriangle(v16, v19, v15);
+            //L
+            builder.AddTriangle(v16, v17, v15);
+            builder.AddTriangle(v18, v17, v16);
+            //R
+            builder.AddTriangle(v19, v21, v20);
+            builder.AddTriangle(v20, v21, v22);
+            //builder.AddTriangle(v19, v16, v20);
+
+            //TopBar
+            builder.AddTriangle(v22, v23, v18);
+            builder.AddTriangle(v24, v23, v22);
             /**/
             GetComponent<MeshFilter>().mesh = builder.CreateMesh(true);
         }
 
-        public IEnumerator StairRebuild()
+        public IEnumerator Rebuild()
         {
-            yield return new WaitForSeconds(delayStairsRebuilding);
+            yield return new WaitForSeconds(delayRebuilding);
             CreateShape();
-            StartCoroutine(StairRebuild());
-        }
-        float SinFunc(float XOrY, float a)
-        {
-            XOrY = XOrY * (Mathf.Sin(a));
-            return XOrY;
-        }
-        float CosFunc(float XOrY, float a)
-        {
-            XOrY = XOrY * (Mathf.Cos(a));
-            return XOrY;
+            StartCoroutine(Rebuild());
         }
 
         Vector3 GetPoints(Vector3 Offset, float x)
@@ -177,189 +224,5 @@ namespace Handout {
             return Offset;
         }
 
-        void NewRotateFunc(Vector3[] vertices, int i, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, int v9, int v10, int v11, int v12, int v13, int v14, int v15, int v16) 
-        {
-            Vector3 Offset = new(0, height * i, depth * i);
-
-            v1 = builder.AddVertex(GetPoints(Offset, vertices[0].x) + vertices[0], new Vector2(1, 0));
-            v2 = builder.AddVertex(GetPoints(Offset, vertices[1].x) + vertices[1], new Vector2(0, 0));
-            // top front:
-            v3 = builder.AddVertex(GetPoints(Offset, vertices[2].x) + vertices[2], new Vector2(1, 0.5f));
-            v4 = builder.AddVertex(GetPoints(Offset, vertices[3].x) + vertices[3], new Vector2(0, 0.5f));
-            // top back:
-            v5 = builder.AddVertex(GetPoints(Offset, vertices[4].x) + vertices[4], new Vector2(1, 1));
-            v6 = builder.AddVertex(GetPoints(Offset, vertices[5].x) + vertices[5], new Vector2(0, 1));
-            // R side
-            v7 = builder.AddVertex(GetPoints(Offset, vertices[6].x) + vertices[6], new Vector2(0, 1));
-            v8 = builder.AddVertex(GetPoints(Offset, vertices[7].x) + vertices[7], new Vector2(1, 1));
-            v9 = builder.AddVertex(GetPoints(Offset, vertices[8].x) + vertices[8], new Vector2(0, 0));
-            // L side
-            v10 = builder.AddVertex(GetPoints(Offset, vertices[9].x) + vertices[9], new Vector2(0, 1));
-            v11 = builder.AddVertex(GetPoints(Offset, vertices[10].x) + vertices[10], new Vector2(1, 1));
-            v12 = builder.AddVertex(GetPoints(Offset, vertices[11].x) + vertices[11], new Vector2(0, 0));
-            // back
-            v13 = builder.AddVertex(GetPoints(Offset, vertices[12].x) + vertices[12], new Vector2(1, 0));
-            v14 = builder.AddVertex(GetPoints(Offset, vertices[13].x) + vertices[13], new Vector2(0, 0));
-            v15 = builder.AddVertex(GetPoints(Offset, vertices[14].x) + vertices[14], new Vector2(1, 1));
-            v16 = builder.AddVertex(GetPoints(Offset, vertices[15].x) + vertices[15], new Vector2(0, 1));
-
-            //front triangles
-            builder.AddTriangle(v1, v2, v3);
-            builder.AddTriangle(v4, v3, v2);
-
-            //top triangles
-            builder.AddTriangle(v3, v4, v5);
-            builder.AddTriangle(v6, v5, v4);
-
-            //side
-            builder.AddTriangle(v7, v8, v9);
-            builder.AddTriangle(v12, v11, v10);
-
-            //back
-            builder.AddTriangle(v15, v14, v13);
-            builder.AddTriangle(v14, v15, v16);
-        }
-
-        void MyRotateFunc(Vector3 savedV5, Vector3 savedV6, Vector3[] vertices, int i, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, int v9, int v10, int v11, int v12, int v13, int v14, int v15, int v16)
-        {
-            float x;
-            float z;
-
-            Vector3 offsetL = new(savedV6.x, height * i, savedV6.z);
-            Vector3 offsetR = new(savedV5.x, height * i, savedV5.z);
-
-            Vector3 Offset = new(0, height * i, depth * i);
-
-            //offsetL = new(CosFunc(offsetL.x, rad) - SinFunc(offsetL.z, rad), offsetL.y, SinFunc(offsetL.x, rad) + CosFunc(offsetL.z, rad));
-            //offsetR = new(CosFunc(offsetR.x, rad) - SinFunc(offsetR.z, rad), offsetR.y, SinFunc(offsetR.x, rad) + CosFunc(offsetR.z, rad));
-
-
-            //V5
-            x = vertices[4].x; z = vertices[4].z;
-
-            Debug.Log("Vertex 5 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[4].x, rad) - SinFunc(vertices[4].z, rad);
-            z = SinFunc(vertices[4].x, rad) + CosFunc(vertices[4].z, rad);
-
-            Debug.Log("Vertex 5  x=" + x + " z=" + z);
-
-            vertices[4].x = x;
-            vertices[4].z = z;
-
-            //V6
-            x = vertices[5].x; z = vertices[5].z;
-
-            Debug.Log("Vertex 6 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[5].x, rad) - SinFunc(vertices[5].z, rad);
-            z = SinFunc(vertices[5].x, rad) + CosFunc(vertices[5].z, rad);
-
-            Debug.Log("Vertex 6  x=" + x + " z=" + z);
-
-            vertices[5].x = x;
-            vertices[5].z = z;
-
-            //V8
-            x = vertices[7].x; z = vertices[7].z;
-
-            Debug.Log("Vertex 8 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[7].x, rad) - SinFunc(vertices[7].z, rad);
-            z = SinFunc(vertices[7].x, rad) + CosFunc(vertices[7].z, rad);
-
-            Debug.Log("Vertex 8  x=" + x + " z=" + z);
-
-            vertices[7].x = x;
-            vertices[7].z = z;
-
-            //V11
-            x = vertices[10].x; z = vertices[10].z;
-
-            Debug.Log("Vertex 11 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[10].x, rad) - SinFunc(vertices[10].z, rad);
-            z = SinFunc(vertices[10].x, rad) + CosFunc(vertices[10].z, rad);
-
-            Debug.Log("Vertex 11  x=" + x + " z=" + z);
-
-            vertices[10].x = x;
-            vertices[10].z = z;
-
-            //V15
-            x = vertices[14].x; z = vertices[14].z;
-
-            Debug.Log("Vertex 15 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[14].x, rad) - SinFunc(vertices[14].z, rad);
-            z = SinFunc(vertices[14].x, rad) + CosFunc(vertices[14].z, rad);
-
-            Debug.Log("Vertex 15  x=" + x + " z=" + z);
-
-            vertices[14].x = x;
-            vertices[14].z = z;
-
-            //V16
-            x = vertices[15].x; z = vertices[15].z;
-
-            Debug.Log("Vertex 16 before change  x=" + x + " z=" + z);
-
-            x = CosFunc(vertices[15].x, rad) - SinFunc(vertices[15].z, rad);
-            z = SinFunc(vertices[15].x, rad) + CosFunc(vertices[15].z, rad);
-
-            Debug.Log("Vertex 16  x=" + x + " z=" + z);
-
-            vertices[15].x = x;
-            vertices[15].z = z;
-
-            //vertices[3] -= vertices[2];
-            //vertices[4] -= vertices[2];
-            //vertices[5] -= vertices[2];
-
-            //Debug.Log("vertices 4 na de - V3" + vertices[3] + "vertices 5 na de - V3" + vertices[4] + "vertices 6 na de - V3" + vertices[5]);
-
-            v1 = builder.AddVertex(offsetR + vertices[0], new Vector2(1, 0));
-            v2 = builder.AddVertex(offsetL + vertices[1], new Vector2(0, 0));
-            // top front:
-            v3 = builder.AddVertex(offsetR + vertices[2], new Vector2(1, 0.5f));
-            v4 = builder.AddVertex(offsetL + vertices[3], new Vector2(0, 0.5f));
-            // top back:
-            v5 = builder.AddVertex(offsetR + vertices[4], new Vector2(1, 1));
-            v6 = builder.AddVertex(offsetL + vertices[5], new Vector2(0, 1));
-            // R side
-            v7 = builder.AddVertex(offsetR + vertices[6], new Vector2(0, 1));
-            v8 = builder.AddVertex(offsetR + vertices[7], new Vector2(1, 1));
-            v9 = builder.AddVertex(offsetR + vertices[8], new Vector2(0, 0));
-            // L side
-            v10 = builder.AddVertex(offsetL + vertices[9], new Vector2(0, 1));
-            v11 = builder.AddVertex(offsetL + vertices[10], new Vector2(1, 1));
-            v12 = builder.AddVertex(offsetL + vertices[11], new Vector2(0, 0));
-            // back
-            v13 = builder.AddVertex(offsetR + vertices[12], new Vector2(1, 0));
-            v14 = builder.AddVertex(offsetL + vertices[13], new Vector2(0, 0));
-            v15 = builder.AddVertex(offsetR + vertices[14], new Vector2(1, 1));
-            v16 = builder.AddVertex(offsetL + vertices[15], new Vector2(0, 1));
-
-            //front triangles
-            builder.AddTriangle(v1, v2, v3);
-            builder.AddTriangle(v4, v3, v2);
-
-            //top triangles
-            builder.AddTriangle(v3, v4, v5);
-            builder.AddTriangle(v6, v5, v4);
-
-            //side
-            builder.AddTriangle(v7, v8, v9);
-            builder.AddTriangle(v12, v11, v10);
-
-            //back
-            builder.AddTriangle(v15, v14, v13);
-            builder.AddTriangle(v14, v15, v16);
-
-            savedV5 = vertices[4] - vertices[0] + offsetR;
-            savedV6 = vertices[5] - vertices[1] + offsetL;
-
-            Debug.Log("saved 5 = " + savedV5 + " 6 = " + savedV6);
-        }
     }
 }
