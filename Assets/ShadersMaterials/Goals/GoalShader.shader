@@ -5,8 +5,6 @@ Shader "CustomGoalTexture/GoalShader"
 		_Color("Color", Color) = (1,1,1,1)
         _Color2("Color2", Color) = (0,1,1,1)
         _Color3("Color3", Color) = (0,0,1,1)
-        _Iterations("Iterations", Integer) = 1
-        _Texture("Texture", 2D) = "white" {}
 	}
 
     SubShader

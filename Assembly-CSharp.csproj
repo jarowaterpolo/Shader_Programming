@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\CrossProduct.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\Extrude.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\SetVector.cs" />
+    <Compile Include="Assets\ClockUpdater.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshBuilder.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\AudioAnalyzer.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateOctahedron.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\ShadersMaterials\Clocks\ClockShader.shader" />
     <None Include="Assets\ShadersMaterials\Water\WaterShader.shader" />
     <None Include="Assets\ShadersMaterials\Goals\GoalShader.shader" />
     <None Include="Assets\ShadersMaterials\FirstShader.shader" />
