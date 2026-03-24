@@ -112,13 +112,13 @@ namespace Handout {
             v6 = builder.AddVertex(offset + vertices[5], new Vector2(0, 1));
             // R side
             v7 = builder.AddVertex(offset + vertices[6], new Vector2(0, 1));
-            v8 = builder.AddVertex(offset + vertices[7], new Vector2(1, 1));
+            v8 = builder.AddVertex(offset + vertices[7], new Vector2(0, 1));
             v9 = builder.AddVertex(offset + vertices[8], new Vector2(0, 0));
 
             v10 = builder.AddVertex(offset + vertices[9], new Vector2(0, 0));
             // L side
             v11 = builder.AddVertex(offset + vertices[10], new Vector2(0, 1));
-            v12 = builder.AddVertex(offset + vertices[11], new Vector2(1, 1));
+            v12 = builder.AddVertex(offset + vertices[11], new Vector2(0, 1));
             v13 = builder.AddVertex(offset + vertices[12], new Vector2(0, 0));
 
             v14 = builder.AddVertex(offset + vertices[13], new Vector2(0, 0));
