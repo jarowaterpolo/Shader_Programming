@@ -87,7 +87,8 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateOctahedron.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ShadersMaterials\Clocks\ClockShader.shader" />
+    <None Include="Assets\ShadersMaterials\Clocks\MainClock\ClockShader.shader" />
+    <None Include="Assets\ShadersMaterials\Clocks\30S\Clock30Shader.shader" />
     <None Include="Assets\ShadersMaterials\Water\WaterShader.shader" />
     <None Include="Assets\ShadersMaterials\Goals\GoalShader.shader" />
     <None Include="Assets\ShadersMaterials\FirstShader.shader" />
