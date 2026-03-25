@@ -6,6 +6,7 @@ Shader "CustomClockTexture/ClockShader"
         _Color2("Color2", Color) = (0,1,1,1)
         _Color3("Color3", Color) = (0,0,1,1)
         _Countdown("Countdown", Float) = 30
+        _Texture("Numbers", 2D) = "white" {}
 	}
 
     SubShader
@@ -28,194 +29,15 @@ Shader "CustomClockTexture/ClockShader"
             float4      _Color2;
             float4      _Color3;
             float     _Countdown;
-
-            float4 SetCOLOR(float2 p, float offset, int num)
-            {
-                float4 col;
-
-                switch(num)
-                {
-                    case 0:
-                        if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9|| .6 - offset < p.x && p.x < .7 - offset&& p.y > .1 && p.y < .9)
-                        {   
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 1:
-                        if (.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            col = _Color2;
-                        }
-                    break;
-
-                    case 2:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .9|| .6 - offset < p.x && p.x < .7 - offset&& p.y > .1 && p.y < .45)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 3:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 4:
-                        if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9|| .6 - offset < p.x && p.x < .7 - offset&& p.y > .45 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 5:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .45 || .6 - offset < p.x && p.x < .7 - offset&& p.y > .45 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 6:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .45 || .6 - offset < p.x && p.x < .7 - offset&& p.y > .1 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 7:
-                        if (.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9 || .6 - offset < p.x && p.x < .7 - offset && p.y > .6 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                            col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 8:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9 || .6 - offset < p.x && p.x < .7 - offset&& p.y > .1 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-
-                    case 9:
-                        if(.6 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .2 || .6 - offset < p.x && p.x < .9 - offset && p.y > .45 && p.y < .55 || .6 - offset < p.x && p.x < .9 - offset && p.y > .8 && p.y < .9)
-                        {
-                            col = _Color3;
-                        }
-                        else
-                        {
-                            if(.8 - offset < p.x && p.x < .9 - offset && p.y > .1 && p.y < .9 || .6 - offset < p.x && p.x < .7 - offset&& p.y > .45 && p.y < .9)
-                            {
-                                col = _Color3;
-                            }
-                            else
-                            {
-                                col = _Color2;
-                            }
-                        }
-                    break;
-                }
-
-                return col;
-            }
+            sampler2D   _Texture;
 
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
                 float2 uv = IN.localTexcoord.xy;
                 float4 color = _Color;
+
+                float x = uv.x - .5;
+                float y = uv.y - .5;
 
                 int Countdown = (int)_Countdown;
 
@@ -248,7 +70,22 @@ Shader "CustomClockTexture/ClockShader"
                         {
                             if (uv.x < .33)
                             {
-                                color = SetCOLOR(uv, .66, k);
+                                x = uv.x - .28;
+                                y = uv.y - .65;
+                                float c1 = sqrt(pow(x,2) * 2 + pow(y,2)); 
+
+                                x = uv.x - .28;
+                                y = uv.y - .35;
+                                float c2 = sqrt(pow(x,2) * 2 + pow(y,2)); 
+
+                                if (.5 < length(c1*10) < 1 || .5 < length(c2*10) < 1)
+                                {
+                                    color = _Color3;
+                                }
+                                else
+                                {
+                                    color = SetCOLOR(uv, .66, k);
+                                }
                             }
                             else
                             {
@@ -261,6 +98,7 @@ Shader "CustomClockTexture/ClockShader"
                         }
                     }
                 }
+                color = tex2D(_Texture, uv);
 				return color;
             }
             ENDCG

@@ -36,6 +36,8 @@ Shader "CustomRenderTexture/FirstShader"
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
                 float2 uv = IN.localTexcoord.xy;
+                // uv /= 2;
+                // uv.x += .5;
                 float4 color = float4(uv.x,uv.y,uv.y,1) * _Color;
 
                 float PI = 3.14159265359;
@@ -202,7 +204,7 @@ Shader "CustomRenderTexture/FirstShader"
                     break;
 
                     case 19:
-                        if (.5 < length(r*2) < 1)
+                        if (.5 < length(r*4) < 1)
                         {
                             color = _Color2;
                         }
