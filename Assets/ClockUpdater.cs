@@ -17,9 +17,9 @@ public class ClockUpdater : MonoBehaviour
 
     private IEnumerator Clock()
     {
-        yield return new WaitForSeconds(1);
         if (Countdown > 0)
         {
+            yield return new WaitForSeconds(1);
             Countdown--;
         }
         else
@@ -27,6 +27,8 @@ public class ClockUpdater : MonoBehaviour
             Countdown = CountdownStartValue;
         }
         material.SetFloat("_Countdown", Mathf.FloorToInt(Countdown));
+
+        yield return null;
 
         StartCoroutine(Clock());
     }
