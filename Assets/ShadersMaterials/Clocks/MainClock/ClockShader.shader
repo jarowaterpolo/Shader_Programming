@@ -47,9 +47,23 @@ Shader "CustomClockTexture/ClockShader"
                 int i = sec % 10;
                 int j = sec / 10;
 
+                float2 SetUV(float2 uv, int num)
+                {
+                    uv.x /= 4;
+                    uv.y /= 3;
+
+                    int h = fmod(num, 4) - 1;
+                    int v = num / 4;
+
+                    uv.x += (h / 4.0);
+                    uv.y += v;
+
+                    return uv;
+                }
+
                 if (k < 1 && j < 1)
                 {
-                    color = SetCOLOR(uv, 0, i);
+                    uv = SetUV(uv, i);
                 }
                 else
                 {
@@ -57,7 +71,7 @@ Shader "CustomClockTexture/ClockShader"
                     {
                         if (uv.x < .66)
                         {
-                                color = SetCOLOR(uv, .33, j);
+                            uv = SetUV(uv, j);
                         }
                         else
                         {    
@@ -98,6 +112,19 @@ Shader "CustomClockTexture/ClockShader"
                         }
                     }
                 }
+
+                // u 1 == u 800
+                // v 1 == v 600
+
+                // u 1/4 == u 200
+                // v 1/4 == v 200
+
+                // uv.x /= 4;
+                // uv.y /= 3;
+
+                // uv.x += (1.0/4.0);
+                // uv.y += (1.0/3.0);
+
                 color = tex2D(_Texture, uv);
 				return color;
             }
