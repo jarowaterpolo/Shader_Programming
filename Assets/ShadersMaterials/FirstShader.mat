@@ -69,7 +69,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Texture:
         m_Texture: {fileID: 2800000, guid: d3dcaef760c4bd148a24e8eb9ff4142c, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
@@ -85,7 +85,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints:
     - _Iterations: 100
-    - _ShaderNums: 16
+    - _ShaderNums: 22
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
