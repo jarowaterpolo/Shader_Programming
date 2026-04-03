@@ -1,0 +1,89 @@
+ /*
+ // color = tex2D(_Texture, uv);
+	// return color;
+
+ if (uv.x < .25)
+ {
+     if (uv.x > 0 && uv.x < .025 || uv.x > .08 && uv.x < .105 || uv.x > .145 && uv.x < .17 || uv.x > .225 && uv.x < .25 )
+     {
+         if (uv.y > .3 && uv.y < .7)
+         color = _Color2;
+     }
+ }
+ else if(uv.x > .25 && uv.x < .5)
+ {
+     if (uv.y > .3 && uv.y < .325 || uv.y > .4 && uv.y < .425 || uv.y > .575 && uv.y < .6 || uv.y > .675 && uv.y < .7)
+     {
+         color = _Color2;
+     }
+     else
+     {
+         color = _Color;    
+     }
+ }
+ else if(uv.x > .5 && uv.x < .75)
+ {
+     if (uv.x > .5 && uv.x < .525 || uv.x > .58 && uv.x < .605 || uv.x > .645 && uv.x < .67 || uv.x > .725 && uv.x < .75 )
+     {
+         if (uv.y > .3 && uv.y < .7)
+         color = _Color2;
+     }
+ }
+ else if(uv.x > .75 && uv.x < 1)
+ {
+     if (uv.y > .3 && uv.y < .325 || uv.y > .4 && uv.y < .425 || uv.y > .575 && uv.y < .6 || uv.y > .675 && uv.y < .7)
+     {
+         color = _Color2;
+     }
+     else
+     {
+         color = _Color;    
+     }
+ }
+
+ //Drawing top and bottom
+ if (uv.x > .0 && uv.x < .25)
+ {
+     if (uv.y > .7 && uv.y < .725)
+     {
+         color = _Color2;
+     }
+     else if (uv.y > .275 && uv.y < .3)
+     {
+         color = _Color2;
+     }
+ }
+ else if (uv.x > .31 && uv.x < .335 || uv.x > .415 && uv.x < .44)
+ {
+     if (uv.y > .7 && uv.y < 1)
+     {
+         color = _Color2;
+     }
+     else if (uv.y > 0 && uv.y < .3)
+     {
+         color = _Color2;
+     }
+ }
+ else if (uv.x > .5 && uv.x < .75)
+ {
+     if (uv.y > .7 && uv.y < .725)
+     {
+         color = _Color2;
+     }
+     else if (uv.y > .275 && uv.y < .3)
+     {
+         color = _Color2;
+     }
+ }      
+ else if (uv.x > .81 && uv.x < .835 || uv.x > .915 && uv.x < .94)
+ {
+     if (uv.y > .7 && uv.y < 1)
+     {
+         color = _Color2;
+     }
+     else if (uv.y > 0 && uv.y < .3)
+     {
+         color = _Color2;
+     }
+ }
+ /**/

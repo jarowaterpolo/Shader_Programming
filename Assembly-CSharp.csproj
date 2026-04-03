@@ -95,6 +95,7 @@
     <None Include="Assets\ShadersMaterials\FirstShader.shader" />
     <None Include="Assets\ShadersMaterials\PatternShader.shader" />
     <None Include="Assets\Music\CREDITS.txt" />
+    <None Include="Assets\ShadersMaterials\WaterpoloBallBackup\BackupOfComment.txt" />
     <None Include="Assets\ShadersMaterials\Mandelbrot.shader" />
   </ItemGroup>
   <ItemGroup>
