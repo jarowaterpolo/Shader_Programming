@@ -9,8 +9,20 @@ Shader "CustomRenderTexture/FirstShader"
         _Iterations("Iterations", Integer) = 1
         _Texture("Texture", 2D) = "white" {}
 
+        [Header(Shape 1)]
+        [Space(10)]
         _Center("Center", Vector) = (0.5,0.5,0,0)
         _Size("Size", Range(0,1)) = .5
+        [Space(40)]
+        [Header(Shape 2)]
+        [Space(10)]
+        _Center2("Center2", Vector) = (0.5,0.5,0,0)
+        _Size2("Size2", Range(0,1)) = .5
+        [Space(40)]
+        [Header(Shape 3)]
+        [Space(10)]
+        _Center3("Center3", Vector) = (0.5,0.5,0,0)
+        _Size3("Size3", Range(0,1)) = .5
 	}
 
     SubShader
@@ -37,6 +49,12 @@ Shader "CustomRenderTexture/FirstShader"
 
             float4 _Center;
             float _Size;
+
+            float4 _Center2;
+            float _Size2;
+
+            float4 _Center3;
+            float _Size3;
 
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
@@ -329,7 +347,18 @@ Shader "CustomRenderTexture/FirstShader"
                     break;
                     
                     case 31:
-                        if (abs(uv.x - _Center.x) + abs(uv.y - _Center.y) < _Size ||
+                        float move = sin(_Time.y / .5) * .125;
+                        float slightSizeChange = (sin(_Time.y / .25) * .5 + .5) * .125;
+
+                        uv.x += move;
+                        uv.y = uv.y - fmod(_Time.y / 2, 1.5) + .5;
+                        
+                        _Size += slightSizeChange;
+                        _Size2 += slightSizeChange;
+                        _Size3 += slightSizeChange;
+
+                        if (
+                            abs(uv.x - _Center.x) + abs(uv.y - _Center.y) < _Size ||
                             length(uv - float2(_Center.x + _Size / 2, _Center.y + _Size / 2)) < sqrt(pow(_Size, 2) * 2) / 2||
                             length(uv - float2(_Center.x - _Size / 2, _Center.y + _Size / 2)) < sqrt(pow(_Size, 2) * 2) / 2
                         )
@@ -337,7 +366,26 @@ Shader "CustomRenderTexture/FirstShader"
                             color = _Color2;
                         }
 
+                        if (
+                            abs(uv.x - _Center2.x) + abs(uv.y - _Center2.y) < _Size2 ||
+                            length(uv - float2(_Center2.x + _Size2 / 2, _Center2.y + _Size2 / 2)) < sqrt(pow(_Size2, 2) * 2) / 2||
+                            length(uv - float2(_Center2.x - _Size2 / 2, _Center2.y + _Size2 / 2)) < sqrt(pow(_Size2, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color2;
+                        }
+
+                        if (
+                            abs(uv.x - _Center3.x) + abs(uv.y - _Center3.y) < _Size3 ||
+                            length(uv - float2(_Center3.x + _Size3 / 2, _Center3.y + _Size3 / 2)) < sqrt(pow(_Size3, 2) * 2) / 2||
+                            length(uv - float2(_Center3.x - _Size3 / 2, _Center3.y + _Size3 / 2)) < sqrt(pow(_Size3, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color2;
+                        }
+
                     break;
+
                 }
 
 				return color;
