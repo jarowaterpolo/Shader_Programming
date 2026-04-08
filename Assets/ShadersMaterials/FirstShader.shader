@@ -8,6 +8,9 @@ Shader "CustomRenderTexture/FirstShader"
         _ShaderNums("ShaderNums", Integer) = 0
         _Iterations("Iterations", Integer) = 1
         _Texture("Texture", 2D) = "white" {}
+
+        _Center("Center", Vector) = (0.5,0.5,0,0)
+        _Size("Size", Range(0,1)) = .5
 	}
 
     SubShader
@@ -32,6 +35,8 @@ Shader "CustomRenderTexture/FirstShader"
             sampler2D  _Texture;
             float4 _Texture_ST;
 
+            float4 _Center;
+            float _Size;
 
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
@@ -321,6 +326,17 @@ Shader "CustomRenderTexture/FirstShader"
                         {
                             color = _Color;
                         }
+                    break;
+                    
+                    case 31:
+                        if (abs(uv.x - _Center.x) + abs(uv.y - _Center.y) < _Size ||
+                            length(uv - float2(_Center.x + _Size / 2, _Center.y + _Size / 2)) < sqrt(pow(_Size, 2) * 2) / 2||
+                            length(uv - float2(_Center.x - _Size / 2, _Center.y + _Size / 2)) < sqrt(pow(_Size, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color2;
+                        }
+
                     break;
                 }
 
