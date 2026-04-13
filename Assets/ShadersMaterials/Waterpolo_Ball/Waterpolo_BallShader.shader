@@ -7,7 +7,6 @@ Shader "CustomWaterpoloBallTexture/WaterpoloBallShader"
         _Texture("BallImg", 2D) = "white" {}
         _TextureStrength("Texture Strength", Range(0,1)) = 1
         _LineWidth("Line Width", Range(0.001, 0.05)) = 0.01
-        _BandHeight("Center Band Height", Range(0.01, 0.3)) = 0.12
 	}
 
     SubShader
@@ -34,10 +33,6 @@ Shader "CustomWaterpoloBallTexture/WaterpoloBallShader"
             float4 _Texture_ST;
             float _TextureStrength;
 
-            float DrawSeam(float value, float width)
-            {
-                return smoothstep(width, 0.0, abs(value));
-            }
 
             float4 frag(v2f_customrendertexture IN) : SV_Target
             {
@@ -50,38 +45,18 @@ Shader "CustomWaterpoloBallTexture/WaterpoloBallShader"
                 float angle = atan2(p.y, p.x);
                 float radius = length(p);
 
-                float seams = 0;
+                float4 color = _Color;
 
-
-                seams += DrawSeam(uv.y - .33, _LineWidth);
-                seams += DrawSeam(uv.y - .66, _LineWidth);
-
-                float segmentCount = 4.0;
-
-                float VerticalLines = frac(uv.x * segmentCount);
-
-                if (uv.y > .33 && uv.y < .66)
+                if (uv.x < _LineWidth || uv.x > 1 - _LineWidth || uv.y < _LineWidth || uv.y > .33 - _LineWidth && uv.y < .33 + _LineWidth  || uv.y > .66 - _LineWidth && uv.y < .66 + _LineWidth || uv.y > 1 - _LineWidth)
                 {
-                    seams += DrawSeam(VerticalLines - .5, _LineWidth);
+                    color = _Color2;
                 }
                 else
                 {
-                    seams += DrawSeam(frac(VerticalLines + .5) - .5, _LineWidth);
+                    color = _Color;
                 }
 
-                float band = smoothstep(_BandHeight, 0.0, abs(p.y));
-
-                float3 col = _Color.rgb;
-
-                col = lerp(col, _Color2.rgb, saturate(seams));
-
-                col *= lerp(1.0, .9, band);
-
-                float4 tex = tex2D(_Texture, uv);
-
-                col = lerp(col, tex.rgb, tex.a * band * _TextureStrength);
-
-                return float4(col, 1);
+                return color;
             }
             ENDCG
         }
