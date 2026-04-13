@@ -68,6 +68,8 @@ Shader "CustomWaterTexture/WaterShader"
                     break;
 
                     case 1:
+                    //make a vertext distortion 
+                    //where the vertext gets divided by the vector to the middle and multiplied by the radius
                         float2 noiseUV1 = uv + float2(_Time.y * 0.1, _Time.y * 0.05);
 
                         float2 noiseSample1 = tex2D(_Texture, noiseUV1).rg;
