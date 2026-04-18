@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{05853CC1-B5EA-B34D-505C-76DF622106F8}</ProjectGuid>
+    <ProjectGuid>{7DD2E911-8396-F564-1B4C-62A77CDB7A68}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\Projection.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\GetVector.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateStairs.cs" />
+    <Compile Include="Assets\CamFlip.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateOctahedron.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +96,9 @@
     <None Include="Assets\ShadersMaterials\Goals\GoalShader.shader" />
     <None Include="Assets\ShadersMaterials\FirstShader.shader" />
     <None Include="Assets\ShadersMaterials\PatternShader.shader" />
+    <None Include="Assets\ShadersMaterials\Water\Waves.shader" />
     <None Include="Assets\Music\CREDITS.txt" />
+    <None Include="Assets\ShadersMaterials\Waterpolo_Ball\WaterpoloBallShape.shader" />
     <None Include="Assets\ShadersMaterials\WaterpoloBallBackup\BackupOfComment.txt" />
     <None Include="Assets\ShadersMaterials\Mandelbrot.shader" />
   </ItemGroup>
@@ -590,6 +593,14 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.66f2\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.66f2\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
