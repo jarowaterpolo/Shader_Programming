@@ -258,7 +258,6 @@ Shader "CustomRenderTexture/FirstShader"
 
                     case 22:
                         color = tex2D(_Texture, uv);
-
                     break;
 
                     case 23:
@@ -266,7 +265,7 @@ Shader "CustomRenderTexture/FirstShader"
                     break;
                      
                     case 24:
-                        color = tex2D(_Texture, -uv);
+                        color = tex2D(_Texture, (-uv));
                     break;
 
                     case 25:
