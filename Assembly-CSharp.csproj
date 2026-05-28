@@ -96,6 +96,7 @@
     <None Include="Assets\ShadersMaterials\Clocks\30S\Clock30Shader.shader" />
     <None Include="Assets\ShadersMaterials\Water\WaterShader.shader" />
     <None Include="Assets\ShadersMaterials\Goals\GoalShader.shader" />
+    <None Include="Assets\ShadersMaterials\Lighting_Test\Lit1.shader" />
     <None Include="Assets\ShadersMaterials\FirstShaders\FirstShader.shader" />
     <None Include="Assets\ShadersMaterials\PatternShader.shader" />
     <None Include="Assets\ShadersMaterials\Water\Waves.shader" />
