@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Editor\AutoUvEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\MeshVisualizerWindow.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Editor\CurveEditor.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Editor\SaveMeshEditor.cs" />
   </ItemGroup>
