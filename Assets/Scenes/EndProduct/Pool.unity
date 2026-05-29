@@ -1435,7 +1435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &839645453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2009,6 +2009,7 @@ GameObject:
   - component: {fileID: 1070879467}
   - component: {fileID: 1070879466}
   - component: {fileID: 1070879465}
+  - component: {fileID: 1070879468}
   m_Layer: 4
   m_Name: Water
   m_TagString: Water
@@ -2048,7 +2049,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -2106,6 +2107,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070879463}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1070879468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070879463}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1103356356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3610,7 +3632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MV_SPD: 10
   Rot_SPD: 180
-  JumpForce: 5
+  JumpForce: 7
 --- !u!54 &1782116440
 Rigidbody:
   m_ObjectHideFlags: 0

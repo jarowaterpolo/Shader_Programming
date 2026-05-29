@@ -19,11 +19,13 @@ public class PositionTester : MonoBehaviour
 
     Vector3 lastResult = Vector3.zero;
     private Rigidbody rb;
+    private Collider col;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -32,11 +34,15 @@ public class PositionTester : MonoBehaviour
         if (InWater)
         {
             rb.mass = 10.0f;
+            col.material.bounciness = .5f;
             MoveBallWithWater();
+            Debug.Log("ball bouciness " + col.material.bounciness);
         }
         else
         {
             rb.mass = 1;
+            col.material.bounciness = 1;
+            Debug.Log("ball bouciness " + col.material.bounciness);
         }
     }
 
