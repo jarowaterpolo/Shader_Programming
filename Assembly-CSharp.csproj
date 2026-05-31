@@ -64,13 +64,13 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\SaveMeshToOBJ.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshModifiers\TextureCycle.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshModifiers\AutoUv.cs" />
-    <Compile Include="Assets\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Curve.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\MeshCreator.cs" />
-    <Compile Include="Assets\RotateToLookAtObject.cs" />
+    <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\GeneralScripts\SunCycle.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Exercises.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateStairsTest.cs" />
+    <Compile Include="Assets\Scripts\RotateToLookAtObject.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\CopyVector.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\GeneralScripts\CameraControls.cs" />
     <Compile Include="Assets\Scripts\CamFlip.cs" />

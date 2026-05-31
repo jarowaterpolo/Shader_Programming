@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RotateToLookAtObject : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class RotateToLookAtObject : MonoBehaviour
     void Update()
     {
         lookVector = ObjectToLookAt.position - transform.position;
+        lookVector.Normalize();
         crossVector = Vector3.Cross(lookVector, transform.forward);
         degreesBetweenVectors = Mathf.Asin(crossVector.magnitude / lookVector.magnitude * transform.forward.magnitude) * Mathf.Rad2Deg;
+        var targetRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + degreesBetweenVectors, transform.rotation.z);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime);
     }
 }
