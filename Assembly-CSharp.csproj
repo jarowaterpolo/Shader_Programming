@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7DD2E911-8396-F564-1B4C-62A77CDB7A68}</ProjectGuid>
+    <ProjectGuid>{05853CC1-B5EA-B34D-505C-76DF622106F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -64,9 +64,10 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\SaveMeshToOBJ.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshModifiers\TextureCycle.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshModifiers\AutoUv.cs" />
+    <Compile Include="Assets\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Curve.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\MeshCreator.cs" />
-    <Compile Include="Assets\Scripts\PositionTester.cs" />
+    <Compile Include="Assets\RotateToLookAtObject.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\GeneralScripts\SunCycle.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Exercises.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateStairsTest.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\SetVector.cs" />
     <Compile Include="Assets\Scripts\ClockUpdater.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshBuilder.cs" />
+    <Compile Include="Assets\Scripts\Goal.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\AudioAnalyzer.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\GoalMesh.cs" />
@@ -95,6 +97,7 @@
     <None Include="Assets\ShadersMaterials\Lighting_Test\Lit.shader" />
     <None Include="Assets\ShadersMaterials\Clocks\30S\Clock30Shader.shader" />
     <None Include="Assets\ShadersMaterials\Water\WaterShader.shader" />
+    <None Include="Assets\ShadersMaterials\ScoreBoard\ScoreBoardShader.shader" />
     <None Include="Assets\ShadersMaterials\Goals\GoalShader.shader" />
     <None Include="Assets\ShadersMaterials\Lighting_Test\Lit1.shader" />
     <None Include="Assets\ShadersMaterials\FirstShaders\FirstShader.shader" />
@@ -596,14 +599,6 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.66f2\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.66f2\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">

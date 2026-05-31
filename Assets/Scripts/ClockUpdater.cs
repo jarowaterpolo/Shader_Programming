@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class ClockUpdater : MonoBehaviour
 {
-    public float CountdownStartValue = 30;
+    [SerializeField] private float CountdownStartValue = 30;
 
-    public Material material;
+    [SerializeField] private Material material;
     float Countdown;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void OnValidate()
+    {
+        if (material == null) return;
+        material.SetFloat("_Countdown", 0);
+    }
     void Start()
     {
         Countdown = CountdownStartValue;

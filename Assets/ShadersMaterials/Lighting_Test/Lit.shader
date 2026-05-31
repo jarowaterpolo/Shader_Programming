@@ -67,12 +67,13 @@ Shader "Unlit/Lit"
 
 				float4 _A = _Ac * _Ai; 
 				float3 N = normalize(i.normal);
-				float3 L = normalize(i.worldPos.xyz - _LightPos.xyz);
+				float3 L = normalize(_LightPos.xyz - i.worldPos.xyz);
 				float _Di = max(dot(N, L),0);
 
 				float3 LightReflection = float3(reflect(-L, N));
 
-				float _Sf = pow(max(dot(normalize(i.normal - _WorldSpaceCameraPos), LightReflection),0),_Smoothness);
+				// float _Sf = pow(max(dot(normalize(_WorldSpaceCameraPos - i.normal), LightReflection),0),_Smoothness);
+				float _Sf = pow(max(dot(normalize(_WorldSpaceCameraPos - i.worldPos.xyz), LightReflection),0),_Smoothness);
 
 				float4 col = (_A + _Di * _LightColor) * albedo + _Si * _Sf * _LightColor;
 				
