@@ -7,6 +7,9 @@ Shader "Unlit/Lit"
 		_Ac("Ambient Color", Color) = (1,1,1,1)
 		_Smoothness("Smoothness", float) = 1
 		_Si("Specular Intensity", float) = 0
+
+		_LightColor("Light Color", Color) = (0,0,0,0)
+		_LightPos("Light Pos", Vector) = (0,0,0)
 	}
 	SubShader
 	{
@@ -34,6 +37,7 @@ Shader "Unlit/Lit"
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
+				float4 worldPos : TEXCOORD1;
 				float4 normal : NORMAL;
 			};
 
@@ -42,6 +46,7 @@ Shader "Unlit/Lit"
 			v2f vert(appdata v)
 			{
 				v2f o;
+				o.worldPos = mul(UNITY_MATRIX_M, v.vertex);
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
 				o.normal = float4(UnityObjectToWorldNormal(v.normal) ,0.0);
@@ -53,20 +58,30 @@ Shader "Unlit/Lit"
 			float _Smoothness;
 			float _Si;
 
+			float4 _LightColor;
+			float3 _LightPos;
+
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 albedo = tex2D(_MainTex, i.uv);
 
 				float4 _A = _Ac * _Ai; 
 				float3 N = normalize(i.normal);
-				float3 L = normalize(_WorldSpaceLightPos0.xyz);
+				float3 L = normalize(i.worldPos.xyz - _LightPos.xyz);
 				float _Di = max(dot(N, L),0);
 
 				float3 LightReflection = float3(reflect(-L, N));
 
-				float _Sf = pow(max(dot(normalize(i.normal - _WorldSpaceCameraPos /*- i.vertex*/), LightReflection),0),_Smoothness);
+				float _Sf = pow(max(dot(normalize(i.normal - _WorldSpaceCameraPos), LightReflection),0),_Smoothness);
 
-				float4 col = (_A + _Di * _LightColor0) * albedo + _Si * _Sf * _LightColor0;
+				float4 col = (_A + _Di * _LightColor) * albedo + _Si * _Sf * _LightColor;
+				
+				// return float4(L.xyz,1);
+
+				// return float4(LightReflection,1);
+
+				// return float4(_WorldSpaceCameraPos, 1);
+
 				return col;
 			}
 			ENDCG

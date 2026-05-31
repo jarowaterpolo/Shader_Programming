@@ -6,6 +6,8 @@ Shader "CustomClock30Texture/Clock30Shader"
         _Color2("Color2", Color) = (0,1,1,1)
         _Color3("Color3", Color) = (0,0,1,1)
         _Countdown("Countdown", Float) = 30
+
+        [HDR] _Emission ("Color", Color) = (1,1,1,1)
 	}
 
     SubShader
@@ -28,6 +30,8 @@ Shader "CustomClock30Texture/Clock30Shader"
             float4      _Color2;
             float4      _Color3;
             float     _Countdown;
+
+            float4 _Emission;
 
             float4 SetCOLOR(float2 p, float offset, int num)
             {
@@ -240,7 +244,7 @@ Shader "CustomClock30Texture/Clock30Shader"
 
 
 
-				return color;
+				return color * _Emission;
             }
             ENDCG
         }

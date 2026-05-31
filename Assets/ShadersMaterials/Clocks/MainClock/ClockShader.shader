@@ -7,6 +7,8 @@ Shader "CustomClockTexture/ClockShader"
         _Color3("Color3", Color) = (0,0,1,1)
         _Countdown("Countdown", Float) = 30
         _Texture("Numbers", 2D) = "white" {}
+
+        [HDR] _Emission ("Color", Color) = (1,1,1,1)
 	}
 
     SubShader
@@ -30,6 +32,8 @@ Shader "CustomClockTexture/ClockShader"
             float4      _Color3;
             float     _Countdown;
             sampler2D   _Texture;
+
+            float4 _Emission;
 
                 float2 SetUV(float2 uv, int num)
                 {
@@ -98,7 +102,7 @@ Shader "CustomClockTexture/ClockShader"
                 }
 
                 color = tex2D(_Texture, uv) * _Color3;
-				return color;
+				return color * _Emission;
             }
             ENDCG
         }
