@@ -21,9 +21,10 @@ public class RotateToLookAtObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lookVector = (ObjectToLookAt.position - transform.position).normalized *-1;
+        lookVector = (ObjectToLookAt.position - transform.position).normalized;
         lookVector.y = 0;
-        crossVector = Vector3.Cross(lookVector, transform.forward);
+        crossVector = Vector3.Cross(transform.forward, lookVector);
+        //Debug.Log(crossVector);
 
         float dot = Vector3.Dot(transform.forward, lookVector);
         degreesBetweenVectors = Mathf.Acos(Mathf.Clamp(dot,-1f,1f)) * Mathf.Rad2Deg;

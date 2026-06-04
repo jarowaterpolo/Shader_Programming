@@ -7,7 +7,7 @@ Shader "CustomClock30Texture/Clock30Shader"
         _Color3("Color3", Color) = (0,0,1,1)
         _Countdown("Countdown", Float) = 30
 
-        [HDR] _Emission ("Color", Color) = (1,1,1,1)
+        [HDR] _Emission ("Emission_Color", Color) = (1,1,1,1)
 	}
 
     SubShader

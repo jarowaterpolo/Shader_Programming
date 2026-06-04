@@ -9,7 +9,7 @@ Shader "Unlit/Lit"
 		_Si("Specular Intensity", float) = 0
 
 		_LightColor("Light Color", Color) = (0,0,0,0)
-		_LightPos("Light Pos", Vector) = (0,0,0)
+		_LightDir("Light Dir", Vector) = (1,0,0)
 	}
 	SubShader
 	{
@@ -59,7 +59,7 @@ Shader "Unlit/Lit"
 			float _Si;
 
 			float4 _LightColor;
-			float3 _LightPos;
+			float3 _LightDir;
 
 			fixed4 frag(v2f i) : SV_Target
 			{
@@ -67,8 +67,9 @@ Shader "Unlit/Lit"
 
 				float4 _A = _Ac * _Ai; 
 				float3 N = normalize(i.normal);
-				float3 L = normalize(_LightPos.xyz - i.worldPos.xyz);
-				float _Di = max(dot(N, L),0);
+				float3 L = normalize(_LightDir.xyz);
+				// float3 L  = _WorldSpaceLightPos0;
+				float _Di = max(dot(N, -L),0);
 
 				float3 LightReflection = float3(reflect(-L, N));
 
@@ -77,7 +78,8 @@ Shader "Unlit/Lit"
 
 				float4 col = (_A + _Di * _LightColor) * albedo + _Si * _Sf * _LightColor;
 				
-				// return float4(L.xyz,1);
+				//return float4(L, 1);
+				// return float4(_Di, _Di, _Di, 1);
 
 				// return float4(LightReflection,1);
 
@@ -89,24 +91,24 @@ Shader "Unlit/Lit"
 		}
 
 		// cast shadows:
-		Pass
-		{
-			Tags{ "LightMode" = "ShadowCaster" }
-			CGPROGRAM
-			#pragma vertex VSMain
-			#pragma fragment PSMain
+		// Pass
+		// {
+		// 	Tags{ "LightMode" = "ShadowCaster" }
+		// 	CGPROGRAM
+		// 	#pragma vertex VSMain
+		// 	#pragma fragment PSMain
 
-			float4 VSMain(float4 vertex:POSITION) : SV_POSITION
-			{
-				return UnityObjectToClipPos(vertex);
-			}
+		// 	float4 VSMain(float4 vertex:POSITION) : SV_POSITION
+		// 	{
+		// 		return UnityObjectToClipPos(vertex);
+		// 	}
 
-			float4 PSMain(float4 vertex:SV_POSITION) : SV_TARGET
-			{
-				return 0;
-			}
+		// 	float4 PSMain(float4 vertex:SV_POSITION) : SV_TARGET
+		// 	{
+		// 		return 0;
+		// 	}
 
-			ENDCG
-		}
+		// 	ENDCG
+		// }
 	}
 }

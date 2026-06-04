@@ -8,7 +8,7 @@ Shader "CustomClockTexture/ClockShader"
         _Countdown("Countdown", Float) = 30
         _Texture("Numbers", 2D) = "white" {}
 
-        [HDR] _Emission ("Color", Color) = (1,1,1,1)
+        [HDR] _Emission ("Emission_Color", Color) = (1,1,1,1)
 	}
 
     SubShader
