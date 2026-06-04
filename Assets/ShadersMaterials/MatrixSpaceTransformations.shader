@@ -12,6 +12,10 @@ Shader "Unlit/MatrixSpaceTransformations"
         _TranslateTime ("Translate Overtime", Vector) = (0,0,0)
         _RotateSpeed ("Rotate Speed", float) = 1
         _TranslateSpeed ("Move Speed", float) = 1
+        _MaxTranslations ("max translations", Vector) = (0,10,0)
+
+        _Move ("Move or not", float) = 0
+        _CornerStartTime ("Corner Start Time", Float) = 0
 
         [HDR] _Emission ("Emission_Color", Color) = (1,1,1,1)
     }
@@ -57,9 +61,13 @@ Shader "Unlit/MatrixSpaceTransformations"
 
             float3 _RotateTime;
             float3 _TranslateTime;
-            
-            float4 _Emission;
 
+            float3 _MaxTranslations;
+            float _Move;
+
+            float _CornerStartTime;
+
+            float4 _Emission;
 
             v2f vert (appdata v)
             {
@@ -67,6 +75,7 @@ Shader "Unlit/MatrixSpaceTransformations"
                 
                 float4 result = v.vertex; 
 
+                float PI = 3.14159265359;
 
                 if (_RotateTime.x == 1)
                 {
@@ -92,10 +101,40 @@ Shader "Unlit/MatrixSpaceTransformations"
                 {
                     _Translate.y += _Time.y * _TranslateSpeed;    
                 }
+                else
+                {
+                    if (_Move == 1)
+                    {                        
+                        if (_TranslateTime.y == .5)
+                        {
+                            float t = _Time.y - _CornerStartTime;
+
+                            float normalized = saturate(t * _TranslateSpeed);
+
+                            float bounce = sin(normalized * PI);
+
+                            _Translate.y = bounce * _MaxTranslations.y;
+                        } 
+                    }
+                    else
+                    {
+                        _Translate.y = 0;    
+                    }
+                }
                 
                 if (_TranslateTime.z == 1)
                 {
                     _Translate.z += _Time.y * _TranslateSpeed;    
+                }
+                else
+                {
+                    if (_Move == 1)
+                    {   
+                        if (_TranslateTime.z == .5)
+                        {
+                            _Translate.z = (_MaxTranslations.z * .5) * (sin(_Time.y * PI * _TranslateSpeed) + 1);    
+                        } 
+                    }
                 }
                 
                 RadiansX = radians(_Degrees.x);
