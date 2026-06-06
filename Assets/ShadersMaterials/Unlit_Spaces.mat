@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_MatrixSpaceTransformations
-  m_Shader: {fileID: 4800000, guid: fb5eec445384b0d449aa674ecbad92fa, type: 3}
+  m_Name: Unlit_Spaces
+  m_Shader: {fileID: 4800000, guid: 72b541977fffd634999b63bffa3d26a3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -19,29 +19,25 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _TimeMult
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 8600000, guid: e2632ca053d06e74bbcfa06250da1ea2, type: 2}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CornerStartTime: 15.035707
-    - _Degrees: 0
-    - _Move: 0
-    - _RotateSpeed: 100
-    - _TimeMult: 100
-    - _TranslateSpeed: 2
+    - _RotateSpeed: 1
+    - _TranslateSpeed: 1
     m_Colors:
-    - _Degrees: {r: 0, g: 0, b: 0, a: 0}
-    - _Emission: {r: 0.05031109, g: 10.535624, b: 16, a: 1}
-    - _MaxTranslations: {r: 1, g: 1, b: 2, a: 1}
-    - _RotateTime: {r: 0, g: 1, b: 0, a: 0}
+    - _Degrees: {r: 45, g: 30, b: 15, a: 0}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
+    - _MaxTranslations: {r: 0, g: 10, b: 0, a: 1}
+    - _RotateTime: {r: 0, g: 0, b: 0, a: 1}
     - _Scaling: {r: 1, g: 1, b: 1, a: 0}
-    - _Translate: {r: 0, g: 0, b: 0, a: 0}
-    - _TranslateTime: {r: 0, g: 0, b: 0.5, a: 0}
+    - _Translate: {r: 1, g: 1, b: 1, a: 0}
+    - _TranslateTime: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

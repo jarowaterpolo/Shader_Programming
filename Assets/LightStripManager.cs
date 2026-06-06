@@ -11,31 +11,38 @@ public class LightStripManager : MonoBehaviour
     [SerializeField] private float moveDelay;
 
     private int counter = 1;
-    private float CornerpassDegree = 0;
     private int[] stripIndex;
     void Start()
     {
         stripIndex = new int[lightStrips.Length];
 
+        for (int i = 0; i < stripIndex.Length; i++) 
+        { 
+            stripIndex[i] = i;
+        }
+
         for (int i = 0; i < lightStrips.Length; i++)
         {
             var v = (stripIndex[i] + 1) % lightPositions.Length;
+            //Debug.Log($"light strip {lightStrips[i].name} has strip index {stripIndex[i]} it should spawn at the position {lightPositions[i].position}");
             lightStrips[i].position = lightPositions[v].position;
-            lightStrips[i].rotation = Quaternion.Euler(90, 0, CornerpassDegree + 90 * i);
+            //Debug.Log($"just set the pos of light strip {lightStrips[i].name} to {lightPositions[v].position}");
+            lightStrips[i].rotation = Quaternion.Euler(90, 0, 90 * i);
         }
 
         StartCoroutine(MoveLights());
     }
-
     IEnumerator MoveLights()
     {
-        for (int i = 0; i < lightStrips.Length; i++) 
+        while (true)
         {
-            StartCoroutine(MoveLight(i));
-        }
+            for (int i = 0; i < lightStrips.Length; i++)
+            {
+                StartCoroutine(MoveLight(i));
+            }
 
-        yield return new WaitForSeconds(moveDelay);
-        StartCoroutine(MoveLights());
+            yield return new WaitForSeconds(moveDelay);
+        }
     }
 
     IEnumerator MoveLight(int i)
@@ -59,20 +66,18 @@ public class LightStripManager : MonoBehaviour
                 var step = passedTime / duration;
 
                 lightStrips[i].position = Vector3.Lerp(startPos, targetPos, step);
-                dist = Vector3.Distance(lightStrips[i].position, targetPos);
-                //Debug.Log($"the distance for moving from {lightPositions[v].position} to {lightStrips[i].position} = {dist}");
             }
         }
 
         lightStrips[i].position = targetPos;
 
-        lightStrips[i].rotation = Quaternion.Euler(0, 0, 0);
-        mat.SetFloat("_CornerStartTime", Time.time);
-        mat.SetFloat("_Move", 1);
+        //lightStrips[i].rotation = Quaternion.Euler(0, 0, 0);
+
+        Debug.Log($"Corner reached by {i} at {Time.time}");
+
         yield return new WaitForSeconds(moveDelay);
-        mat.SetFloat("_Move", 0);
-        CornerpassDegree += 90;
-        lightStrips[i].rotation = Quaternion.Euler(90, 0, CornerpassDegree + 90 * i);
+
+        lightStrips[i].rotation = Quaternion.Euler(90, 0, 90 * v);
         stripIndex[i] = v;
     }
 }

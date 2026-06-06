@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Unlit/MatrixSpaceTransformations"
+Shader "Unlit/Spaces"
 {
     Properties
     {
@@ -88,80 +88,26 @@ Shader "Unlit/MatrixSpaceTransformations"
 
                 if (_TranslateTime.x == 1)
                 {
-                    _Translate.x += _Time.y * _TranslateSpeed;    
+                    _Translate.x += sin(_Time.y * _TranslateSpeed);    
                 }
                 
                 if (_TranslateTime.y == 1)
                 {
                     _Translate.y += sin(_Time.y * _TranslateSpeed);    
                 }
-                else
-                {                   
-                        if (_TranslateTime.y == .5)
-                        {
-                            float bounce = saturate(sin(_Time.y * _TranslateSpeed * PI));
-                            _Translate.y = bounce * -_MaxTranslations.y;
-                        } 
-                }
                 
                 if (_TranslateTime.z == 1)
                 {
                     _Translate.z += sin(_Time.y * _TranslateSpeed);    
                 }
-                else
-                {
-                        if (_TranslateTime.z == .5)
-                        {
-                            float bounce = saturate(sin(_Time.y * _TranslateSpeed * PI));
-                            _Translate.z = bounce * -_MaxTranslations.z;
-                        } 
-                }
+
                 
                 RadiansX = radians(_Degrees.x);
                 RadiansY = radians(_Degrees.y);
                 RadiansZ = radians(_Degrees.z);
 
-                float4x4 RotxM = {
-                1,0,0,0,
-                0,cos(RadiansX),-sin(RadiansX),0,
-                0,sin(RadiansX),cos(RadiansX),0,
-                0,0,0,1
-                };
+                result.y += _Translate.y;
 
-                float4x4 RotyM = {
-                    cos(RadiansY),0,sin(RadiansY),0,
-                    0,1,0,0,
-                    -sin(RadiansY),0,cos(RadiansY),0,
-                    0,0,0,1
-                };
-
-                float4x4 RotzM = {
-                    cos(RadiansZ),-sin(RadiansZ),0,0,
-                    sin(RadiansZ),cos(RadiansZ),0,0,
-                    0,0,1,0,
-                    0,0,0,1
-                };
-
-                float4x4 ScaleM = {
-                    _Scaling.x,0,0,0,
-                    0,_Scaling.y,0,0,
-                    0,0,_Scaling.z,0,
-                    0,0,0,1
-                };
-
-                float4x4 TranslateM = {
-                    1,0,0,0,
-                    0,1,0,0,
-                    0,0,1,0,
-                    _Translate.x,_Translate.y,_Translate.z,1
-                };
-
-                float4x4 ResultM = mul(RotxM,RotyM);
-                ResultM = mul(ResultM, RotzM);
-                ResultM = mul(ResultM, ScaleM);
-
-                result = mul(ResultM, float4(result));
-                result = mul(result, TranslateM);
                 result = mul(UNITY_MATRIX_M, result);
 
                 o.vertex = mul(UNITY_MATRIX_VP, result);
