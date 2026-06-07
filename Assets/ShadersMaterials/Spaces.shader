@@ -63,6 +63,12 @@ Shader "Unlit/Spaces"
 
             float4 _Emission;
 
+            float3 Rotate(float3 XYZ)
+            {
+
+                return XYZ;
+            }
+
             v2f vert (appdata v)
             {
                 v2f o;
