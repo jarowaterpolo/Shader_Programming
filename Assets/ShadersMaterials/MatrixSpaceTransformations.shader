@@ -153,7 +153,7 @@ Shader "Unlit/MatrixSpaceTransformations"
                     1,0,0,0,
                     0,1,0,0,
                     0,0,1,0,
-                    _Translate.x,_Translate.y,_Translate.z,1
+                    _Translate.x,-_Translate.y,_Translate.z,1
                 };
 
                 float4x4 ResultM = mul(RotxM,RotyM);
@@ -161,8 +161,8 @@ Shader "Unlit/MatrixSpaceTransformations"
                 ResultM = mul(ResultM, ScaleM);
 
                 result = mul(ResultM, float4(result));
-                result = mul(result, TranslateM);
                 result = mul(UNITY_MATRIX_M, result);
+                result = mul(result, TranslateM);
 
                 o.vertex = mul(UNITY_MATRIX_VP, result);
 

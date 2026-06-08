@@ -63,10 +63,34 @@ Shader "Unlit/Spaces"
 
             float4 _Emission;
 
-            float3 Rotate(float3 XYZ)
+            float2 RotateOnZ(float2 XY)
             {
+                float x = XY.x * cos(RadiansZ) - XY.y * sin(RadiansZ);
+                float y = XY.x * sin(RadiansZ) + XY.y * cos(RadiansZ);
 
-                return XYZ;
+                XY = float2(x,y);
+
+                return XY;
+            }
+
+            float2 RotateOnX(float2 YZ)
+            {
+                float y = YZ.x * cos(RadiansZ) - YZ.y * sin(RadiansZ);
+                float z = YZ.x * sin(RadiansZ) + YZ.y * cos(RadiansZ);
+
+                YZ = float2(y,z);
+
+                return YZ;
+            }
+
+            float2 RotateOnY(float2 XZ)
+            {
+                float x = XZ.x * cos(RadiansZ) + XZ.y * sin(RadiansZ);
+                float z = XZ.x * -sin(RadiansZ) + XZ.y * cos(RadiansZ);
+
+                XZ = float2(x,z);
+
+                return XZ;
             }
 
             v2f vert (appdata v)
@@ -112,9 +136,14 @@ Shader "Unlit/Spaces"
                 RadiansY = radians(_Degrees.y);
                 RadiansZ = radians(_Degrees.z);
 
-                result.y += _Translate.y;
+                result = float4(RotateOnZ(result.xy),result.z,result.w);
+                result = float4(result.x,RotateOnX(result.yz),result.w);
+                float2 xz = RotateOnY(result.xz);
+                result = float4(xz.x,result.y,xz.y,result.w);
 
                 result = mul(UNITY_MATRIX_M, result);
+
+                result.y += _Translate.y;
 
                 o.vertex = mul(UNITY_MATRIX_VP, result);
 

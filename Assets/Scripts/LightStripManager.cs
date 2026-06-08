@@ -73,7 +73,7 @@ public class LightStripManager : MonoBehaviour
 
         //lightStrips[i].rotation = Quaternion.Euler(0, 0, 0);
 
-        Debug.Log($"Corner reached by {i} at {Time.time}");
+        //Debug.Log($"Corner reached by {i} at {Time.time}");
 
         yield return new WaitForSeconds(moveDelay);
 

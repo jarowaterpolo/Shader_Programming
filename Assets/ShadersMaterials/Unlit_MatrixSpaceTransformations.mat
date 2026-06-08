@@ -38,10 +38,10 @@ Material:
     m_Colors:
     - _Degrees: {r: 0, g: 0, b: 0, a: 0}
     - _Emission: {r: 0.05031109, g: 10.535624, b: 16, a: 1}
-    - _MaxTranslations: {r: 1, g: 1, b: 2, a: 1}
+    - _MaxTranslations: {r: 1, g: 2, b: 1, a: 1}
     - _RotateTime: {r: 0, g: 1, b: 0, a: 0}
     - _Scaling: {r: 1, g: 1, b: 1, a: 0}
     - _Translate: {r: 0, g: 0, b: 0, a: 0}
-    - _TranslateTime: {r: 0, g: 0, b: 0.5, a: 0}
+    - _TranslateTime: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

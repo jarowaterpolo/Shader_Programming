@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_MattWithHole
+  m_Name: Shader Graphs_MattWithHole_Purple
   m_Shader: {fileID: -6465566751694194690, guid: 543391193e62f1a40ac43b65ff7528c7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
