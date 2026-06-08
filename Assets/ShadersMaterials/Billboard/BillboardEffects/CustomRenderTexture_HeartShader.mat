@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_Billboard
-  m_Shader: {fileID: 4800000, guid: 8fa26d4b628477e44924a25a7faa5755, type: 3}
+  m_Name: CustomRenderTexture_HeartShader
+  m_Shader: {fileID: 4800000, guid: 00ad3936d17b88842bd7cfcde01bf7b0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,13 +23,28 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 8600000, guid: 9a92cbd446af9c34c9935931d7dec100, type: 2}
+    - _Texture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Degrees: 45
-    m_Colors: []
+    - _MaxMoveOnX: 0.125
+    - _MaxMoveOnY: 1.5
+    - _MaxSizeChange: 0.125
+    - _MoveSpeed: 3
+    - _Offset: 0.5
+    - _Size: 0.02
+    - _Size2: 0.02
+    - _Size3: 0.02
+    - _TimeMult: 2
+    m_Colors:
+    - _Center: {r: 0.25, g: 0.4, b: 0, a: 0}
+    - _Center2: {r: 0.85, g: 0.6, b: 0, a: 0}
+    - _Center3: {r: 0.65, g: 0.2, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 1, g: 0, b: 0, a: 1}
+    - _Color3: {r: 0, g: 0, b: 1, a: 1}
+    - _MoveSpeed: {r: 5, g: 4, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

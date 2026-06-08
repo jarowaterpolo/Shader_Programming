@@ -1,11 +1,6 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using Unity.Burst.Intrinsics;
-using Unity.Mathematics;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 namespace Handout {
 	public class CreatePoolMat : MonoBehaviour {
@@ -143,7 +138,7 @@ namespace Handout {
             //front
             for (int i = 0; i < 4; i++)
             {
-                Debug.Log($"vertex was added to v[{i}] = {FrontVertices[i]}, {FrontUVs[i]}");
+                //Debug.Log($"vertex was added to v[{i}] = {FrontVertices[i]}, {FrontUVs[i]}");
                 v[i] = builder.AddVertex(FrontVertices[i], FrontUVs[i]);
             }
             VCounter += 4;
@@ -151,8 +146,8 @@ namespace Handout {
             //right
             for (int i = 0; i < 4; i++)
             {
-                Debug.Log($"{i + VCounter}");
-                Debug.Log($"i + Vcounter = {i + VCounter} and v has {v.Length} spaces so v[{i + VCounter}] == {v[i + VCounter]}");
+                //Debug.Log($"{i + VCounter}");
+                //Debug.Log($"i + Vcounter = {i + VCounter} and v has {v.Length} spaces so v[{i + VCounter}] == {v[i + VCounter]}");
                 v[i + VCounter] = builder.AddVertex(RightVertices[i], RightUVs[i]);
             }
             VCounter += 4;
@@ -216,7 +211,7 @@ namespace Handout {
 
         public IEnumerator Rebuild()
         {
-            Debug.Log($"{delayStairsRebuilding} second before rebuilding");
+            //Debug.Log($"{delayStairsRebuilding} second before rebuilding");
             yield return new WaitForSeconds(delayStairsRebuilding);
             GetComponent<MeshFilter>().mesh = builder.CreateMesh(false);
             CreateShape();
