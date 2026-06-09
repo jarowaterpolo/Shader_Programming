@@ -32,6 +32,7 @@ Material:
     - _MaxMoveOnX: 0.125
     - _MaxMoveOnY: 1.5
     - _MaxSizeChange: 0.125
+    - _MiniHeartsSizeDiff: 0.03
     - _MoveSpeed: 3
     - _Offset: 0.5
     - _Size: 0.02
@@ -44,7 +45,7 @@ Material:
     - _Center3: {r: 0.65, g: 0.2, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 1, g: 0, b: 0, a: 1}
-    - _Color3: {r: 0, g: 0, b: 1, a: 1}
+    - _Color3: {r: 1, g: 0, b: 1, a: 1}
     - _MoveSpeed: {r: 5, g: 4, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

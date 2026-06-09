@@ -11,6 +11,7 @@ Shader "CustomRenderTexture/HeartShader"
         _MaxMoveOnX("Max movement on X", float) = .125
         _MaxMoveOnY("Max movement on Y", float) = 1.5
         _Offset("Offset", float) = .5
+        _MiniHeartsSizeDiff("Mini hearts size difference", float) = .01
 
         [Header(Shape 1)]
         [Space(10)]
@@ -53,6 +54,8 @@ Shader "CustomRenderTexture/HeartShader"
             float _MaxMoveOnX;
             float _MaxMoveOnY;
             float _Offset;
+
+            float _MiniHeartsSizeDiff;
 
             float4 _Center;
             float _Size;
@@ -107,6 +110,37 @@ Shader "CustomRenderTexture/HeartShader"
                         )
                         {
                             color = _Color2;
+                        }
+
+                        float MiniSize = _Size - _MiniHeartsSizeDiff;
+                        float MiniSize2 = _Size2 - _MiniHeartsSizeDiff;
+                        float MiniSize3 = _Size3 - _MiniHeartsSizeDiff;
+
+                        if (
+                            abs(uv.x - _Center.x) + abs(uv.y - _Center.y) < MiniSize ||
+                            length(uv - float2(_Center.x + MiniSize / 2, _Center.y + MiniSize / 2)) < sqrt(pow(MiniSize, 2) * 2) / 2||
+                            length(uv - float2(_Center.x - MiniSize / 2, _Center.y + MiniSize / 2)) < sqrt(pow(MiniSize, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color3;
+                        }
+
+                        if (
+                            abs(uv.x - _Center2.x) + abs(uv.y - _Center2.y) < MiniSize2 ||
+                            length(uv - float2(_Center2.x + MiniSize2 / 2, _Center2.y + MiniSize2 / 2)) < sqrt(pow(MiniSize2, 2) * 2) / 2||
+                            length(uv - float2(_Center2.x - MiniSize2 / 2, _Center2.y + MiniSize2 / 2)) < sqrt(pow(MiniSize2, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color3;
+                        }
+
+                        if (
+                            abs(uv.x - _Center3.x) + abs(uv.y - _Center3.y) < MiniSize3 ||
+                            length(uv - float2(_Center3.x + MiniSize3 / 2, _Center3.y + MiniSize3 / 2)) < sqrt(pow(MiniSize3, 2) * 2) / 2||
+                            length(uv - float2(_Center3.x - MiniSize3 / 2, _Center3.y + MiniSize3 / 2)) < sqrt(pow(MiniSize3, 2) * 2) / 2
+                        )
+                        {
+                            color = _Color3;
                         }
 
 				return color;

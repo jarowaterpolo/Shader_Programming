@@ -6,7 +6,6 @@ Shader "Unlit/Spaces"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Degrees ("amountOfDegreesToRotate", Vector) = (45,30,15,0)
-        _Scaling ("Scale", Vector) = (1,1,1,0)
         _Translate ("Transform", Vector) = (1,1,1,0)
         _RotateTime ("Rotate Overtime", Vector) = (0,0,0)
         _TranslateTime ("Translate Overtime", Vector) = (0,0,0)
@@ -75,8 +74,8 @@ Shader "Unlit/Spaces"
 
             float2 RotateOnX(float2 YZ)
             {
-                float y = YZ.x * cos(RadiansZ) - YZ.y * sin(RadiansZ);
-                float z = YZ.x * sin(RadiansZ) + YZ.y * cos(RadiansZ);
+                float y = YZ.x * cos(RadiansX) - YZ.y * sin(RadiansX);
+                float z = YZ.x * sin(RadiansX) + YZ.y * cos(RadiansX);
 
                 YZ = float2(y,z);
 
@@ -85,8 +84,8 @@ Shader "Unlit/Spaces"
 
             float2 RotateOnY(float2 XZ)
             {
-                float x = XZ.x * cos(RadiansZ) + XZ.y * sin(RadiansZ);
-                float z = XZ.x * -sin(RadiansZ) + XZ.y * cos(RadiansZ);
+                float x = XZ.x * cos(RadiansY) + XZ.y * sin(RadiansY);
+                float z = XZ.x * -sin(RadiansY) + XZ.y * cos(RadiansY);
 
                 XZ = float2(x,z);
 
