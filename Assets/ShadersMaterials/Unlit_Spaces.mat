@@ -29,13 +29,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _RotateSpeed: 1
+    - _RotateSpeed: 100
     - _TranslateSpeed: 1
     m_Colors:
-    - _Degrees: {r: 48.33, g: 171.19, b: 387, a: 0}
+    - _Degrees: {r: 48.33, g: 238.65, b: 387, a: 0}
     - _Emission: {r: 1, g: 1, b: 1, a: 1}
     - _MaxTranslations: {r: 10, g: 10, b: 10, a: 1}
-    - _RotateTime: {r: 0, g: 1, b: 0, a: 1}
+    - _RotateTime: {r: 1, g: 1, b: 1, a: 1}
     - _Scaling: {r: 1, g: 1, b: 1, a: 0}
     - _Translate: {r: 0, g: 0, b: 0, a: 0}
     - _TranslateTime: {r: 0, g: 1, b: 0, a: 1}
