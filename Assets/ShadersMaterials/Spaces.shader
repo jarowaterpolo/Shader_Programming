@@ -30,6 +30,8 @@ Shader "Unlit/Spaces"
 
         Pass
         {
+            Cull Back
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -82,30 +84,30 @@ Shader "Unlit/Spaces"
 
             float4 _Emission;
 
-            float2 RotateOnZ(float2 XY)
+            float2 RotateOnZ(float2 XY, float RadZ)
             {
-                float x = XY.x * cos(RadiansZ) - XY.y * sin(RadiansZ);
-                float y = XY.x * sin(RadiansZ) + XY.y * cos(RadiansZ);
+                float x = XY.x * cos(RadZ) - XY.y * sin(RadZ);
+                float y = XY.x * sin(RadZ) + XY.y * cos(RadZ);
 
                 XY = float2(x,y);
 
                 return XY;
             }
 
-            float2 RotateOnX(float2 YZ)
+            float2 RotateOnX(float2 YZ, float RadX)
             {
-                float y = YZ.x * cos(RadiansX) - YZ.y * sin(RadiansX);
-                float z = YZ.x * sin(RadiansX) + YZ.y * cos(RadiansX);
+                float y = YZ.x * cos(RadX) - YZ.y * sin(RadX);
+                float z = YZ.x * sin(RadX) + YZ.y * cos(RadX);
 
                 YZ = float2(y,z);
 
                 return YZ;
             }
 
-            float2 RotateOnY(float2 XZ)
+            float2 RotateOnY(float2 XZ, float RadY)
             {
-                float x = XZ.x * cos(RadiansY) + XZ.y * sin(RadiansY);
-                float z = XZ.x * -sin(RadiansY) + XZ.y * cos(RadiansY);
+                float x = XZ.x * cos(RadY) + XZ.y * sin(RadY);
+                float z = XZ.x * -sin(RadY) + XZ.y * cos(RadY);
 
                 XZ = float2(x,z);
 
@@ -119,60 +121,63 @@ Shader "Unlit/Spaces"
                 float4 result = v.vertex; 
                 float3 RotatedNormal = v.normal;
 
+                float3 calculatedDegrees = _Degrees.xyz;
+                float3 calculatedTranslate = _Translate.xyz;
+
                 float PI = 3.14159265359;
 
                 if (_RotateTime.x == 1)
                 {
-                    _Degrees.x += _Time.y * _RotateSpeed;
+                    calculatedDegrees.x += _Time.y * _RotateSpeed;
                 }
 
                 if (_RotateTime.y == 1)
                 {
-                    _Degrees.y += _Time.y * _RotateSpeed;
+                    calculatedDegrees.y += _Time.y * _RotateSpeed;
                 }
 
                 if (_RotateTime.z == 1)
                 {    
-                    _Degrees.z += _Time.y * _RotateSpeed;
+                    calculatedDegrees.z += _Time.y * _RotateSpeed;
                 }
 
                 if (_TranslateTime.x == 1)
                 {
-                    _Translate.x += sin(_Time.y * _TranslateSpeed);    
+                    calculatedTranslate.x += sin(_Time.y * _TranslateSpeed);    
                 }
                 
                 if (_TranslateTime.y == 1)
                 {
-                    _Translate.y += sin(_Time.y * _TranslateSpeed);    
+                    calculatedTranslate.y += sin(_Time.y * _TranslateSpeed);    
                 }
                 
                 if (_TranslateTime.z == 1)
                 {
-                    _Translate.z += sin(_Time.y * _TranslateSpeed);    
+                    calculatedTranslate.z += sin(_Time.y * _TranslateSpeed);    
                 }
 
                 
-                RadiansX = radians(_Degrees.x);
-                RadiansY = radians(_Degrees.y);
-                RadiansZ = radians(_Degrees.z);
+                float radX = radians(calculatedDegrees.x);
+                float radY = radians(calculatedDegrees.y);
+                float radZ = radians(calculatedDegrees.z);
 
-                result = float4(RotateOnZ(result.xy),result.z,result.w);
-                result = float4(result.x,RotateOnX(result.yz),result.w);
-                float2 xz = RotateOnY(result.xz);
+                result = float4(RotateOnZ(result.xy, radZ),result.z,result.w);
+                result = float4(result.x,RotateOnX(result.yz, radX),result.w);
+                float2 xz = RotateOnY(result.xz, radY);
                 result = float4(xz.x,result.y,xz.y,result.w);
 
                 result = mul(UNITY_MATRIX_M, result);
 
-                result.y += _Translate.y;
+                result.y += calculatedTranslate.y;
                 o.worldPos = result.xyz;
 
                 o.vertex = mul(UNITY_MATRIX_VP, result);
 
                 o.uv = v.uv;
 
-                RotatedNormal = float3(RotateOnZ(RotatedNormal.xy),RotatedNormal.z);
-                RotatedNormal = float3(RotatedNormal.x,RotateOnX(RotatedNormal.yz));
-                float2 Rotxz = RotateOnY(RotatedNormal.xz);
+                RotatedNormal = float3(RotateOnZ(RotatedNormal.xy, radZ),RotatedNormal.z);
+                RotatedNormal = float3(RotatedNormal.x,RotateOnX(RotatedNormal.yz, radX));
+                float2 Rotxz = RotateOnY(RotatedNormal.xz, radY);
                 RotatedNormal = float3(Rotxz.x,RotatedNormal.y,Rotxz.y);
 
                 o.normal = normalize(mul((float3x3)UNITY_MATRIX_M, RotatedNormal));
@@ -187,7 +192,7 @@ Shader "Unlit/Spaces"
                 // sample the texture
                 fixed4 Texcol = tex2D(_MainTex, i.uv);
 
-                float3 normal = i.normal;
+                float3 normal = normalize(i.normal);
 
                 float diffInt = max(dot(normal, -_LightDir), 0);
 
