@@ -13,6 +13,14 @@ Shader "Unlit/Spaces"
         _TranslateSpeed ("Translate Speed", float) = 1
         _MaxTranslations ("max translations", Vector) = (0,10,0)
 
+        _ACol("Ambient Color", Color) = (1,1,1,1)
+		_AInt("Ambient Intensity", Float) = 0.1
+		_SInt("Specular Intensity", Float) = 0.1
+		_smoothness("Smoothness", Float) = 0.1
+
+        _LightColor("Light Color", Color) = (0,0,0,0)
+		_LightDir("Light Dir", Vector) = (1,0,0,0)
+
         [HDR] _Emission ("Emission_Color", Color) = (1,1,1,1)
     }
     SubShader
@@ -27,17 +35,21 @@ Shader "Unlit/Spaces"
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "UnityLightingCommon.cginc" // NEEDED FOR LightColor0 !
 
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 normal : TEXCOORD1;
+                float3 worldPos : TEXCOORD2;
             };
 
             sampler2D _MainTex;
@@ -59,6 +71,14 @@ Shader "Unlit/Spaces"
             float3 _TranslateTime;
 
             float3 _MaxTranslations;
+
+            float4		_ACol;
+			float		_AInt;
+			float		_SInt;
+			float		_smoothness;
+
+            float4 _LightColor;
+			float4 _LightDir;
 
             float4 _Emission;
 
@@ -97,6 +117,7 @@ Shader "Unlit/Spaces"
                 v2f o;
                 
                 float4 result = v.vertex; 
+                float3 RotatedNormal = v.normal;
 
                 float PI = 3.14159265359;
 
@@ -143,18 +164,39 @@ Shader "Unlit/Spaces"
                 result = mul(UNITY_MATRIX_M, result);
 
                 result.y += _Translate.y;
+                o.worldPos = result.xyz;
 
                 o.vertex = mul(UNITY_MATRIX_VP, result);
 
                 o.uv = v.uv;
+
+                RotatedNormal = float3(RotateOnZ(RotatedNormal.xy),RotatedNormal.z);
+                RotatedNormal = float3(RotatedNormal.x,RotateOnX(RotatedNormal.yz));
+                float2 Rotxz = RotateOnY(RotatedNormal.xz);
+                RotatedNormal = float3(Rotxz.x,RotatedNormal.y,Rotxz.y);
+
+                o.normal = normalize(mul((float3x3)UNITY_MATRIX_M, RotatedNormal));
+
+                // o.normal = mul(UNITY_MATRIX_VP, RotatedNormal);
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                return col * _Emission;
+                fixed4 Texcol = tex2D(_MainTex, i.uv);
+
+                float3 normal = i.normal;
+
+                float diffInt = max(dot(normal, -_LightDir), 0);
+
+                float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
+				float3 reflection = reflect(_LightDir, normal);
+				float specForm = pow(max(dot(viewDir, reflection), 0), _smoothness);
+				float4 col = _AInt * _ACol + (diffInt + _SInt * specForm) * _LightColor * Texcol;
+
+                return col;
             }
             ENDCG
         }
