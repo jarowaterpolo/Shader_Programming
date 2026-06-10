@@ -949,6 +949,8 @@ PlayableDirector:
     value: {fileID: 2135030408}
   - key: {fileID: -2659218771179411572, guid: da09d96d41ed1fa46b8597df1189ef1e, type: 2}
     value: {fileID: 625257198}
+  - key: {fileID: 4086890596368694822, guid: da09d96d41ed1fa46b8597df1189ef1e, type: 2}
+    value: {fileID: 1404601765}
   m_ExposedReferences:
     m_References:
     - d603a0daa1532734ebfa6d329c4e584c: {fileID: 625257199}
@@ -2920,7 +2922,7 @@ Transform:
   m_GameObject: {fileID: 839525388}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18301274, y: 0.6830127, z: -0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: 38.77, y: 7.08, z: -0.59}
+  m_LocalPosition: {x: 38, y: 7, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4909,6 +4911,7 @@ GameObject:
   - component: {fileID: 1404601763}
   - component: {fileID: 1404601762}
   - component: {fileID: 1404601761}
+  - component: {fileID: 1404601765}
   m_Layer: 0
   m_Name: LightStrip_Cam
   m_TagString: Untagged
@@ -5015,13 +5018,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404601760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0037016168, y: -0.71080863, z: 0.0037407856, w: 0.7033658}
+  m_LocalRotation: {x: 0.0037016156, y: -0.71080863, z: 0.003740785, w: 0.7033658}
   m_LocalPosition: {x: -44, y: 4.5, z: -48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1404601765
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404601760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1404682926
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,7 +7884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   w: 3
-  h: 1
+  h: 0.5
   d: 3
   deg: 0
   delayStairsRebuilding: 1
@@ -8075,19 +8100,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.78
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.1666665
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.49999994
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8095,7 +8120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.86602545
       objectReference: {fileID: 0}
     - target: {fileID: 8536523225684855007, guid: e9e79d732e92af8489002bbff0b5fa93, type: 3}
       propertyPath: m_LocalRotation.z

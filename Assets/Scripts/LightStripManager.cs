@@ -10,7 +10,6 @@ public class LightStripManager : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float moveDelay;
 
-    private int counter = 1;
     private int[] stripIndex;
     void Start()
     {

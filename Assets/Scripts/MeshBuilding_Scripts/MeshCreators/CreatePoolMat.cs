@@ -26,7 +26,7 @@ namespace Handout {
             //CreateShape ();
             if (shape == Shapes.CubeWithSideUVChange)
             {
-                UV_Mult = UV_Mult;
+                //UV_Mult = UV_Mult;
             }
             else
             {
