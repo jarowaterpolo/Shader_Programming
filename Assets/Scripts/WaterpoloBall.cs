@@ -11,12 +11,12 @@ public class WaterpoloBall : MonoBehaviour
     [SerializeField] float yOffset = 0f;
     [SerializeField] float zOffset = 0.5f;
 
-    [SerializeField] private int WaveAmount;
-    [SerializeField] private float WaveSpeed;
-    [SerializeField] private float Height;
+    [SerializeField] private int waveAmount;
+    [SerializeField] private float waveSpeed;
+    [SerializeField] private float height;
 
 
-    [SerializeField] private bool InWater;
+    [SerializeField] private bool inWater;
 
     Vector3 lastResult = Vector3.zero;
     private Rigidbody rb;
@@ -36,7 +36,7 @@ public class WaterpoloBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InWater)
+        if (inWater)
         {
             rb.mass = 10.0f;
             col.material.bounciness = .5f;
@@ -65,7 +65,7 @@ public class WaterpoloBall : MonoBehaviour
         }
 
         float pi = 3.14159265359f;
-        float wave = Mathf.Sin(Time.timeSinceLevelLoad * pi * WaveSpeed + ((result.x) + (result.z)) * pi * WaveAmount) * Height + yOffset;
+        float wave = Mathf.Sin(Time.timeSinceLevelLoad * pi * waveSpeed + ((result.x) + (result.z)) * pi * waveAmount) * height + yOffset;
 
         Vector3 pos = transform.position;
         pos.y = wave;
@@ -92,11 +92,11 @@ public class WaterpoloBall : MonoBehaviour
     {
         if (other.CompareTag("Water"))
         {
-            InWater = true;
+            inWater = true;
         }
         else
         {
-            InWater = false;
+            inWater = false;
         }
     }
 }

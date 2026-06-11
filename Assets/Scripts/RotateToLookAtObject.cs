@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class RotateToLookAtObject : MonoBehaviour
 {
-    [SerializeField] private Transform ObjectToLookAt;
+    [SerializeField] private Transform objectToLookAt;
 
     private Vector3 lookVector;
     private Vector3 crossVector;
@@ -12,16 +12,16 @@ public class RotateToLookAtObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (ObjectToLookAt == null)
+        if (objectToLookAt == null)
         {
-            ObjectToLookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            objectToLookAt = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         };
     }
 
     // Update is called once per frame
     void Update()
     {
-        lookVector = (ObjectToLookAt.position - transform.position).normalized;
+        lookVector = (objectToLookAt.position - transform.position).normalized;
         lookVector.y = 0;
         crossVector = Vector3.Cross(transform.forward, lookVector);
         //Debug.Log(crossVector);

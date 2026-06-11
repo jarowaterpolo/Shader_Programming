@@ -1,9 +1,9 @@
 using UnityEngine;
 public class Player : MonoBehaviour
 {
-    public float MV_SPD = 10;
-    public float Rot_SPD = 30;
-    public float JumpForce = 50;
+    public float moveSpeed = 10;
+    public float rotationSpeed = 30;
+    public float jumpForce = 50;
 
     private float xRotation = 0;
 
@@ -40,21 +40,21 @@ public class Player : MonoBehaviour
 
         if (canJump)
         {
-            rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
 
     private void Move()
     {
         Vector3 MoveVector = new(/*0*/ Input.GetAxis("Horizontal") /**/, 0, Input.GetAxis("Vertical"));
-        MoveVector *= MV_SPD;
+        MoveVector *= moveSpeed;
         rb.AddRelativeForce(MoveVector);
     }
 
     private void Rotate()
     {
-            float mouseX = Input.GetAxis("Mouse X") * Rot_SPD * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * Rot_SPD * Time.deltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);

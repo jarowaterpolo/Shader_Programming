@@ -7557,6 +7557,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 911645634}
+    - target: {fileID: 1002117630311216859, guid: e927231e8430e8b469891726e9a62008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.99
+      objectReference: {fileID: 0}
     - target: {fileID: 3745469494955784920, guid: e927231e8430e8b469891726e9a62008, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7569,6 +7573,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 911645634}
+    - target: {fileID: 4383305055371865244, guid: e927231e8430e8b469891726e9a62008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.99
+      objectReference: {fileID: 0}
     - target: {fileID: 4616688542414800847, guid: e927231e8430e8b469891726e9a62008, type: 3}
       propertyPath: WaterpoloBall
       value: 
