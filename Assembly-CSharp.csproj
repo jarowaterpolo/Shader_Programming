@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\GeneralScripts\SunCycle.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreatePoolMatOld.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\Exercises.cs" />
+    <Compile Include="Assets\StartTimeline.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\MeshCreators\CreateStairsTest.cs" />
     <Compile Include="Assets\Scripts\RotateToLookAtObject.cs" />
     <Compile Include="Assets\Scripts\MeshBuilding_Scripts\VectorTools\CopyVector.cs" />

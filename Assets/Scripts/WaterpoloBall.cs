@@ -79,6 +79,8 @@ public class WaterpoloBall : MonoBehaviour
     }
     IEnumerator BallRespawn()
     {
+        Animator animator = GetComponent<Animator>();
+        animator.enabled = false;
         col.enabled = false;
         model.SetActive(false);
         rb.linearVelocity = Vector3.zero;
