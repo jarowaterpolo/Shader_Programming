@@ -1127,9 +1127,9 @@ MonoBehaviour:
         z: 11.443756
       Rotation:
         value:
-          x: -0.0016230101
-          y: -0.06583136
-          z: 0.024587698
+          x: -0.0016230098
+          y: -0.06583135
+          z: 0.024587695
           w: 0.99752647
     - Position:
         x: 35.37
@@ -2930,6 +2930,10 @@ PrefabInstance:
       propertyPath: ObjectToLookAt
       value: 
       objectReference: {fileID: 1699738196}
+    - target: {fileID: 2145423214539797150, guid: b22b4c0642d583b499254433f682a496, type: 3}
+      propertyPath: objectToLookAt
+      value: 
+      objectReference: {fileID: 1699738196}
     - target: {fileID: 3459467957278484221, guid: b22b4c0642d583b499254433f682a496, type: 3}
       propertyPath: m_Name
       value: Human (1)
@@ -4515,6 +4519,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145423214539797150, guid: b22b4c0642d583b499254433f682a496, type: 3}
       propertyPath: ObjectToLookAt
+      value: 
+      objectReference: {fileID: 1699738196}
+    - target: {fileID: 2145423214539797150, guid: b22b4c0642d583b499254433f682a496, type: 3}
+      propertyPath: objectToLookAt
       value: 
       objectReference: {fileID: 1699738196}
     - target: {fileID: 3459467957278484221, guid: b22b4c0642d583b499254433f682a496, type: 3}
